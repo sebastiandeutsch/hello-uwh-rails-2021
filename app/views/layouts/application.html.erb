@@ -18,8 +18,12 @@
     <% end %>
     <nav>
       <ul>
-        <li><a href="/posts">Posts</a></li>
-        <li><a href="/posts/new">Neuer Post</a></li>
+        <li>
+          <%= link_to 'Alle Posts', posts_path %>
+        </li>
+        <li>
+          <%= link_to 'Neuer Post', new_post_path %>
+        </li>
       </ul>
     </nav>
     <%= yield %>
