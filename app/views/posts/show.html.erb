@@ -2,3 +2,44 @@
 <p>
   <%= @post.text %>
 </p>
+
+<h3>Neuen Kommentar</h3>
+<div>
+  <%= form_for [@post, Comment.new] do |f| %>
+    <div>
+      <%= f.label :text %>
+      <%= f.text_area :text %>
+    </div>
+
+    <div>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div>
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+    </div>
+
+    <div>
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>
+
+<h3>Kommentare</h3>
+<ol>
+  <% @post.comments.order(created_at: :desc).each do |comment| %>
+    <li>
+      <p>
+        <%= comment.text %>
+      </p>
+      <p>
+        <%= link_to comment.name, "mailto:#{comment.email}" %>
+      </p>
+      <p>
+        <%= link_to 'Kommentar löschen', post_comment_path(@post, comment), method: 'DELETE' %>
+      </p>
+    </li>
+  <% end %>
+</ol>
